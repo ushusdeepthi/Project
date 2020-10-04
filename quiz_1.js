@@ -66,8 +66,9 @@ class Question{
         for(let i=0;i<checkbox_collection.length;i++){ 
             if(document.getElementsByTagName("input")[i].checked)
             {
-             checkbox_check_index.push(i);}
+                checkbox_check_index.push(i);
             }
+        }
           
         let correct_answer_arr=[this.correct_answer[index-1].answer_a_correct,
                                 this.correct_answer[index-1].answer_b_correct,

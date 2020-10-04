@@ -62,8 +62,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
                      question.displayQuestion(index);
                  }
                  if(index>0 && index<self.number_of_questions){
-                     let display_space=document.getElementById("display");//remove is using innerHTML ls file
-                     display_space.remove();                                //remove is using innerHTML ls file
                      if(index==(self.number_of_questions-1)) start_quiz.textContent="FINISH";
                      let a=question.chosenAnswer(index);
                      console.log(a);
@@ -72,7 +70,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
                      }else{
                          self.score=self.score+0;}
                      console.log(self.score);
- 
+                     let display_space=document.getElementById("display");//remove is using innerHTML ls file
+                     display_space.remove();                                //remove is using innerHTML ls file
                      question.displayQuestion(index);
                      }
                  if (index==self.number_of_questions){
