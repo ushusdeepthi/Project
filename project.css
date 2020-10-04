@@ -1,0 +1,13 @@
+*{
+    background-color: #ecf0ff;
+    margin: 1%;
+    padding:1%;
+}
+#welcome{
+    text-align: center;
+}
+#personal_details{
+    width:25%;
+    margin:0px auto;
+}
+
