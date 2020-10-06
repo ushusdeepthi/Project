@@ -1,3 +1,4 @@
+//Class has all the properties of quiz, question, answers etc.
 class Quiz {
     constructor(data) {
        this.category=[];
@@ -5,7 +6,7 @@ class Quiz {
             this.answer_arr=[];
             this.correct_answer=[];
             this.current_qusetion=0;
-
+        //pushing data from API into specific arrays
         for(let i=0; i<10;i++){
             this.category.push(data[i].category);
             this.question_arr.push(data[i].question);
@@ -14,7 +15,7 @@ class Quiz {
 
         }       
     }
-
+    //Methos explaining and overview of what to do, when we reach a specific question-DOM manipulation.
     loading(number,score){
         console.log(this.category);
         console.log(this.question_arr);
@@ -23,22 +24,25 @@ class Quiz {
         let start_quiz=document.getElementById("start_quiz");
         start_quiz.addEventListener("click",()=>{  
             start_quiz.textContent="NEXT";
-            start_quiz.className="next";  
+            start_quiz.className="next";
+            //let a=this.current_qusetion+1;
+            //let b=document.getElementById("number_question"+a);
+            //b.className="trial";
             if(this.current_qusetion==0){
                 this.displayQuestion();
             }
             if(this.current_qusetion>0 && this.current_qusetion<number){
                
                 if(this.current_qusetion==(number-1)) start_quiz.textContent="FINISH";
-                let a=this.chosenAnswer(this.correct_answer);
-                console.log(a);
-                if(a===true){
+                let answer=this.chosenAnswer(this.correct_answer);
+                console.log(answer);
+                if(answer===true){
                     score=score+1;
                 }else{
                     score=score+0;}
                 console.log(score);
-                 let display_space=document.getElementById("display");//remove is using innerHTML ls file
-                display_space.remove();                                //remove is using innerHTML ls file
+                 let display_space=document.getElementById("display");
+                display_space.remove();                               
                 this.displayQuestion();
                 }
             if (this.current_qusetion==number){
@@ -51,9 +55,10 @@ class Quiz {
                 console.log(score);
                 let display_space=document.getElementById("display");
                 let start_quiz=document.getElementById("start_quiz");
-                //let display_space=document.getElementById("display");//remove is using innerHTML ls file
-                display_space.remove();                                //remove is using innerHTML ls file
-               // player_name.remove();
+                for(let i=1;i<=number;i++){
+                    document.getElementById("number_question"+i).remove()};
+                display_space.remove();                                
+               
                 start_quiz.remove();
                 display_space.remove();
                 let score_box=document.createElement("p");
@@ -71,6 +76,7 @@ class Quiz {
             this.current_qusetion++;    
         })
     }
+        //method to display category, questions & set of answers
         displayQuestion(){
         let header=document.getElementById("header");
         let display_space=document.createElement("div");
@@ -122,6 +128,7 @@ class Quiz {
     
 
     } 
+    //Method gets data from checkboxes, and correct answers to respective arrays
     chosenAnswer(){
         
         let checkbox_collection=document.getElementsByTagName("input");
@@ -152,6 +159,7 @@ class Quiz {
         console.log(points);
         return points;
     }
+    //Method taking parameters of correct answer array and checkbox checked and comparing both
     gamePoints(correct_answer_check,checkbox_check){
         console.log(correct_answer_check);
         console.log(checkbox_check);

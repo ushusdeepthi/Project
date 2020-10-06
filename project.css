@@ -10,4 +10,8 @@
     width:25%;
     margin:0px auto;
 }
-
+.trial{
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(124, 145, 184);
+}
