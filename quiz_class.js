@@ -32,9 +32,9 @@ class Quiz {
             if(this.current_qusetion>0 && this.current_qusetion<number){
                
                 if(this.current_qusetion==(number-1)) start_quiz.textContent="FINISH";
-                let a=this.chosenAnswer(this.correct_answer);
-                console.log(a);
-                if(a===true){
+                let check_answer=new checkAnswer(this.correct_answer,this.current_qusetion);
+                console.log(check_answer.check);
+                if(check_answer.check===true){
                     score=score+1;
                 }else{
                     score=score+0;}
@@ -44,9 +44,9 @@ class Quiz {
                 this.displayQuestion();
                 }
             if (this.current_qusetion==number){
-                let answer=this.chosenAnswer();
-                console.log(answer);
-                if(answer===true){
+                let check_answer=new checkAnswer(this.correct_answer,this.current_qusetion);
+                console.log(check_answer.check);
+                if(check_answer.check===true){
                     score=score+1;
                 }else{
                     score=score+0;}
@@ -114,8 +114,28 @@ class Quiz {
        }
        header.appendChild(display_space);    
     }
-    chosenAnswer(){
-        
+    
+} 
+   
+class Answers{
+    constructor(answer_curr_question){
+        this.answer=this.getAnswer(answer_curr_question);
+    }
+    getAnswer(answer_curr_question){
+        let single_answer_arr=[ answer_curr_question.answer_a,
+                                answer_curr_question.answer_b,
+                                answer_curr_question.answer_c,
+                                answer_curr_question.answer_d,                        
+                                answer_curr_question.answer_e];
+        return single_answer_arr;
+    }
+
+}
+class checkAnswer{
+    constructor(correct_answer,current_question){
+        this.check=this.chosenAnswer(correct_answer,current_question);
+    }
+    chosenAnswer(correct_answer,current_question){
         let checkbox_collection=document.getElementsByTagName("input");
         console.log(checkbox_collection);
         checkbox_collection=Array.from(checkbox_collection);
@@ -127,11 +147,11 @@ class Quiz {
                 else return false;
             });
             
-        let correct_answer_arr=[this.correct_answer[this.current_qusetion-1].answer_a_correct,
-                                this.correct_answer[this.current_qusetion-1].answer_b_correct,
-                                this.correct_answer[this.current_qusetion-1].answer_c_correct,
-                                this.correct_answer[this.current_qusetion-1].answer_d_correct,                        
-                                this.correct_answer[this.current_qusetion-1].answer_e_correct];
+        let correct_answer_arr=[correct_answer[current_question-1].answer_a_correct,
+                                correct_answer[current_question-1].answer_b_correct,
+                                correct_answer[current_question-1].answer_c_correct,
+                                correct_answer[current_question-1].answer_d_correct,                        
+                                correct_answer[current_question-1].answer_e_correct];
         console.log(correct_answer_arr);
         let correct_answer_check=[];
         for(let i=0;i<checkbox_collection.length;i++){
@@ -139,8 +159,6 @@ class Quiz {
             else correct_answer_check.push(false);
             
         }
-       
-
 
         let points=this.gamePoints(correct_answer_check,checkbox_check);
         console.log(points);
@@ -160,21 +178,4 @@ class Quiz {
         }
       
     }
-} 
-   
-class Answers{
-    constructor(answer_curr_question){
-        this.answer=this.getAnswer(answer_curr_question);
-    }
-    getAnswer(answer_curr_question){
-        let single_answer_arr=[ answer_curr_question.answer_a,
-                                answer_curr_question.answer_b,
-                                answer_curr_question.answer_c,
-                                answer_curr_question.answer_d,                        
-                                answer_curr_question.answer_e];
-        return single_answer_arr;
-    }
-
-}    
-
-
+}   
