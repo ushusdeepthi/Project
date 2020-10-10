@@ -1,10 +1,10 @@
 class Quiz {
     constructor(data) {
-       this.category=[];
-            this.question_arr=[];
-            this.answer_arr=[];
-            this.correct_answer=[];
-            this.current_qusetion=0;
+        this.category=[];
+        this.question_arr=[];
+        this.answer_arr=[];
+        this.correct_answer=[];
+        this.current_qusetion=0;
 
         for(let i=0; i<10;i++){
             this.category.push(data[i].category);

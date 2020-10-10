@@ -1,39 +1,40 @@
-class Quiz {
+class Quiz { // class with properties like question answer etc as parameters
     constructor(data) {
-       this.category=[];
-            this.question_arr=[];
-            this.answer_arr=[];
-            this.correct_answer=[];
-            this.current_qusetion=0;
-
+        this.category=[];
+        this.question_arr=[];
+        this.answer_obj_arr=[];
+        this.correct_answer_obj=[];
+        this.current_qusetion=0;
+        //pushing values into the respective arrays(properties)
         for(let i=0; i<10;i++){
             this.category.push(data[i].category);
             this.question_arr.push(data[i].question);
-            this.answer_arr.push(data[i].answers);
-            this.correct_answer.push(data[i].correct_answers);
-
-        }       
-    }
-
-    loading(number,score){
+            this.answer_obj_arr.push(data[i].answers);
+            this.correct_answer_obj.push(data[i].correct_answers);
+        }  
         console.log(this.category);
-        console.log(this.question_arr);
-        console.log(this.correct_answer);
-        console.log(this.answer_arr);
+        console.log(this.question_arr);  
+        console.log(this.answer_obj_arr);  
+        console.log(this.correct_answer_obj);  
 
-        
+
+    }
+    //method controlling the loading of the contents using click event.
+    loading(number,score){
         let start_quiz=document.getElementById("start_quiz");
         start_quiz.addEventListener("click",()=>{  
             start_quiz.textContent="NEXT";
             start_quiz.className="next";  
             if(this.current_qusetion==0){
                 this.displayQuestion();
+                let question_number=document.getElementById("number_question"+(this.current_qusetion+1));
+                question_number.className="question_no";
             }
             if(this.current_qusetion>0 && this.current_qusetion<number){
-               
+                let question_number=document.getElementById("number_question"+(this.current_qusetion+1));
+                question_number.className="question_no";
                 if(this.current_qusetion==(number-1)) start_quiz.textContent="FINISH";
-                let check_answer=new checkAnswer(this.correct_answer,this.current_qusetion);
-                console.log(check_answer.check);
+                let check_answer=new checkAnswer(this.correct_answer_obj,this.current_qusetion);
                 if(check_answer.check===true){
                     score=score+1;
                 }else{
@@ -44,8 +45,7 @@ class Quiz {
                 this.displayQuestion();
                 }
             if (this.current_qusetion==number){
-                let check_answer=new checkAnswer(this.correct_answer,this.current_qusetion);
-                console.log(check_answer.check);
+                let check_answer=new checkAnswer(this.correct_answer_obj,this.current_qusetion);
                 if(check_answer.check===true){
                     score=score+1;
                 }else{
@@ -60,16 +60,12 @@ class Quiz {
                 display_space.remove();
                 let result=document.createElement("div");
                 result.setAttribute("id","result");
-                if(score===number){
-                    let top_score=document.createElement("p");
-                    top_score.innerHTML="CONGRATULATIONS!!! You have the top score"
-                    result.appendChild(top_score);
-                }
-                if(score<=(number/4)){
-                    let top_score=document.createElement("p");
-                    top_score.innerHTML="Your level is below Average"
-                    result.appendChild(top_score);
-                }
+                let top_score=document.createElement("p");
+                if(score==number)top_score.innerHTML="CONGRATULATIONS!!! You have the top score";
+                else if(score<number/2)top_score.innerHTML="Your level is Below Average";
+                else if(score==number/2) top_score.innerHTML="Your level is Average";
+                else if(score>number/2)top_score.innerHTML="Your level is Above Average";  
+                result.appendChild(top_score);
                 let score_box=document.createElement("p");
                 score_box.setAttribute("id","score_box");
                 score_box.innerHTML+="TOTAL SCORE :"+ score;
@@ -97,9 +93,11 @@ class Quiz {
         category.className="category";
         category.textContent="Category: "+this.category[this.current_qusetion];
         question.textContent="Question "+(this.current_qusetion+1)+": "+this.question_arr[this.current_qusetion];
-        display_space.appendChild(category);
+        display_space.appendChild(category);   
+
+    
         display_space.appendChild(question);
-        let answer=new Answers(this.answer_arr[this.current_qusetion]);
+        let answer=new Answers(this.answer_obj_arr[this.current_qusetion]);
         console.log(answer.answer);
         for(let i=0;i<answer.answer.length;i++){
            if(answer.answer[i]!=null){
@@ -137,9 +135,7 @@ class checkAnswer{
     }
     chosenAnswer(correct_answer,current_question){
         let checkbox_collection=document.getElementsByTagName("input");
-        console.log(checkbox_collection);
         checkbox_collection=Array.from(checkbox_collection);
-        console.log(checkbox_collection);
             let checkbox_check=checkbox_collection.map((value)=>{
                 if (value.checked){
                     value.className="checked";
@@ -152,7 +148,6 @@ class checkAnswer{
                                 correct_answer[current_question-1].answer_c_correct,
                                 correct_answer[current_question-1].answer_d_correct,                        
                                 correct_answer[current_question-1].answer_e_correct];
-        console.log(correct_answer_arr);
         let correct_answer_check=[];
         for(let i=0;i<checkbox_collection.length;i++){
             if(correct_answer_arr[i]==="true")correct_answer_check.push(true);
@@ -161,7 +156,6 @@ class checkAnswer{
         }
 
         let points=this.gamePoints(correct_answer_check,checkbox_check);
-        console.log(points);
         return points;
     }
     gamePoints(correct_answer_check,checkbox_check){
