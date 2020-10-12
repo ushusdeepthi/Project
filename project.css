@@ -36,6 +36,15 @@
     text-align: center;
 }
 .question_no{
-    background-color: blue;
+    background-color: rgb(140, 133, 240);
+    box-shadow: 5px 5px 4px #888888;
 }
-
+#start_quiz:hover,.new_game:hover,#button:hover{
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 5px 5px 4px #888888;
+}
+#start_quiz:active,.new_game:active,#button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+  }

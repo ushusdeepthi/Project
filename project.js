@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(e) {
     let submit_details= document.getElementById("button");
-    submit_details.addEventListener("click",()=>{
+     submit_details.addEventListener("click",(e)=>{
+        e.preventDefault();
         let player=  new Player();//new object created under class Player
         player.playerData();//calling playerdata method
      })
@@ -17,12 +18,15 @@ class Player{   //Class with properties of player ie name, number of questions p
         this.name=document.getElementById("name").value;
         console.log(this.name);
         this.number_of_questions= document.getElementById("questions").value;
+        if (this.number_of_questions<5 || this.number_of_questions>10){
+            alert("Enter a number from 5 to 10");
+            window.location.reload();
+        }
         console.log(this.number_of_questions);
         let welcome=document.getElementById("welcome");
         welcome.remove();
         personal_details.remove();
         this.newGame();
-
    } 
    //Method waits to fetch data and sends fetched data as parameter to a new object created
    //DOm manipulation-adding elements. 
@@ -46,7 +50,6 @@ class Player{   //Class with properties of player ie name, number of questions p
         await fetch('https://quizapi.io/api/v1/questions?apiKey=l3yYIL0YelN5Oto4f09M7Qec0uVJfIHsfh6QuOw6&limit=10')
         .then(response => response.json())
         .then(data => {
-
             let quiz = new Quiz(data);//new object quiz created inside class Quiz
             quiz.loading(this.number_of_questions,this.score);//calling method loading of class with with number of questions and score as parameter
         })
