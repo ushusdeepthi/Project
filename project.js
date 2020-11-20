@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
      submit_details.addEventListener("click",(e)=>{
         e.preventDefault();
         let player=  new Player();//new object created under class Player
-        player.playerData();//calling playerdata method
+        player.playerData();//calling playerData method
      })
  })
 class Player{   //Class with properties of player ie name, number of questions preffered and final score.
