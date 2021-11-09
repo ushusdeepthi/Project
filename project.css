@@ -1,50 +1,79 @@
-*{
-    background-color: #ecf0ff;
-    margin: 1%;
-    padding:0.5%;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap");
+* {
+  background-color: #ecf0ff;
+  margin: 1%;
+  padding: 0.5%;
 }
-#welcome{
-    text-align: center;
+body {
+  font-family: "Montserrat", sans-serif;
 }
-#personal_details{
+#welcome {
+  text-align: center;
+}
+/* #personal_details{
     width:25%;
     margin:0px auto;
+} */
+#personal_details {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  margin: 0px auto;
+  padding: 2.5rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-.question
-{
-    font-size: 1.2em;
+
+#personal_details input {
+  border-radius: 5px;
+  padding: 0.75rem;
 }
-.category{
-    font-size:1.2em;
+
+#button {
+  padding: 0.75rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 5px;
 }
-.answer{
-    border:2px solid black;
-    border-radius: 5px;
-    width: 60%;
+.question {
+  font-size: 1.2em;
 }
-#player_name{
-    font-size: 1.3em;
-    font-family:Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    width: 30%;
-    margin:0px auto;
+.category {
+  font-size: 1.2em;
 }
-#result{
-    width:50%;
-    margin:0px auto;
-    font-size: 1.3em;
-    text-align: center;
+.answer {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 60%;
 }
-.question_no{
-    background-color: rgb(140, 133, 240);
-    box-shadow: 5px 5px 4px #888888;
+#player_name {
+  font-size: 1.3em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  width: 30%;
+  margin: 0px auto;
 }
-#start_quiz:hover,.new_game:hover,#button:hover{
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 5px 5px 4px #888888;
+#result {
+  width: 50%;
+  margin: 0px auto;
+  font-size: 1.3em;
+  text-align: center;
 }
-#start_quiz:active,.new_game:active,#button:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(2px);
-  }
+.question_no {
+  background-color: rgb(140, 133, 240);
+  box-shadow: 5px 5px 4px #888888;
+}
+#start_quiz:hover,
+.new_game:hover,
+#button:hover {
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 5px 5px 4px #888888;
+}
+#start_quiz:active,
+.new_game:active,
+#button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
